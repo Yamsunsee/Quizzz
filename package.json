@@ -1,0 +1,12 @@
+{
+  "name": "quizz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass -w ./src/styles/scss/main.scss ./src/styles/css/main.min.css --style compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
