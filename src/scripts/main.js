@@ -4,9 +4,11 @@ let count = document.querySelector(".count")
 let prev = document.querySelector(".prev")
 let next = document.querySelector(".next")
 let score = document.querySelector(".score")
+let complete = document.querySelector(".complete")
 let maxLength = state.length
 let current = 0
 let totalScore = 0
+let memory = []
 
 function loadData(data) {
   count.innerText = `${current + 1} / ${maxLength}`
@@ -23,16 +25,39 @@ function loadData(data) {
 
   answers.forEach((answer) => {
     answer.onclick = (element) => {
-      let index = Array.from(answers).indexOf(element.target)
-      if (index == correctAnswer) {
-        answer.classList.add("correct")
-        totalScore++
-        score.innerText = totalScore
-      } else {
-        answer.classList.add("incorrect")
-        answers[correctAnswer].classList.add("correct")
-        totalScore = Math.max(0, --totalScore)
-        score.innerText = totalScore
+      if (answer.classList.length == 1) {
+        let index = Array.from(answers).indexOf(element.target)
+        if (index == correctAnswer) {
+          answer.classList.add("correct")
+          for (let i = 0; i < 4; i++) {
+            if (i != index && i != correctAnswer) {
+              answers[i].classList.add("disable")
+            }
+          }
+          if (!memory.includes(current)) {
+            totalScore++
+            score.innerText = totalScore
+          }
+        } else {
+          answer.classList.add("incorrect")
+          answers[correctAnswer].classList.add("correct")
+          for (let i = 0; i < 4; i++) {
+            if (i != index && i != correctAnswer) {
+              answers[i].classList.add("disable")
+            }
+          }
+          if (memory.includes(current)) {
+            totalScore -= 2
+            totalScore = Math.max(0, totalScore)
+          } else {
+            totalScore = Math.max(0, --totalScore)
+          }
+          score.innerText = totalScore
+        }
+        if (!memory.includes(current)) {
+          memory.push(current)
+        }
+        complete.classList.add("show")
       }
     }
   })
@@ -40,13 +65,21 @@ function loadData(data) {
 
 prev.onclick = () => {
   current = Math.max(0, --current)
-  console.log("current:", current)
+  if (memory.includes(current)) {
+    complete.classList.add("show")
+  } else {
+    complete.classList.remove("show")
+  }
   loadData(state[current])
 }
 
 next.onclick = () => {
   current = Math.min(maxLength - 1, ++current)
-  console.log("current:", current)
+  if (memory.includes(current)) {
+    complete.classList.add("show")
+  } else {
+    complete.classList.remove("show")
+  }
   loadData(state[current])
 }
 

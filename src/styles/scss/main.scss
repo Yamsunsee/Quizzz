@@ -59,12 +59,20 @@ body {
       &.correct {
         color: #fff;
         background-color: #badc58;
+        cursor: default;
       }
 
       &.incorrect {
         color: #fff;
         border: solid 2px #ff7979;
         background-color: #ff7979;
+        cursor: default;
+      }
+
+      &.disable {
+        color: #bdc3c7;
+        border: solid 2px #bdc3c7;
+        cursor: default;
       }
     }
   }
@@ -96,5 +104,26 @@ body {
     background-color: #e67e22;
     padding: 1rem;
     border-radius: inherit;
+  }
+
+  .complete {
+    display: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    background-color: #1abc9c;
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    &.show {
+      display: flex !important;
+    }
   }
 }
