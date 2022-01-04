@@ -7,6 +7,35 @@ body {
   min-height: 100vh;
   background-image: repeating-linear-gradient(60deg, #ccc, #ddd, #ccc 5px);
   user-select: none;
+  position: relative;
+}
+
+.reset {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: ease-out 0.3s;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #3498db;
+  }
+
+  span {
+    margin-right: 0.5rem;
+  }
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
 }
 
 .container {
