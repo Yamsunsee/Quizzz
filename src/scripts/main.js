@@ -105,10 +105,7 @@ next.onclick = () => {
 }
 
 reset.onclick = () => {
-  localStorage.setItem("current", 0)
-  localStorage.setItem("totalScore", 0)
-  memory = []
-  localStorage.setItem("memory", JSON.stringify(memory))
+  localStorage.clear()
   window.location.reload()
 }
 
